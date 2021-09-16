@@ -6,7 +6,9 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn -DskipTests clean package'
+                dir('jenkins/ejercicios/cicd/infra-ii') {
+                    sh 'mvn -DskipTests clean package'
+                }
             }
         }
         stage('Test') {
@@ -21,8 +23,8 @@ pipeline {
         }
     }
     post {
-        success {
-            archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+        dir (‘maven-adderapp’) {
+                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
         }
     }
 }
