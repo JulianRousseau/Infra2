@@ -1,10 +1,12 @@
 pipeline {
     agent any
-
+    tools {
+      maven "maven-nodo-principal"
+    }
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+                sh 'mvn -DskipTests clean package'
             }
         }
         stage('Test') {
@@ -16,6 +18,11 @@ pipeline {
             steps {
                 echo 'Deploying....'
             }
+        }
+    }
+    post {
+        success {
+            archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
         }
     }
 }
