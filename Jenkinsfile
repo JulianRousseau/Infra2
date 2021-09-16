@@ -6,8 +6,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                dir('jenkins/ejercicios/cicd/infra-ii') {
-                    sh 'mvn -DskipTests clean package'
+                dir ('maven-adderapp') {
+                  sh 'mvn -DskipTests clean package'
                 }
             }
         }
