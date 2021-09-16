@@ -23,7 +23,7 @@ pipeline {
         }
     }
     post {
-        dir ('ejercicios/maven-adderapp') {
+        dir ("ejercicios/maven-adderapp") {
             archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
         }
     }
